@@ -8,9 +8,21 @@
 
 This project examines the relationship between school performance and socioeconomic context using publicly available datasets. The analysis evaluates whether factors such as unemployment rate, college attainment, and the proportion of students receiving free or reduced-price lunch predict differences in average ACT scores among U.S. schools.
 
-- **Problem addressed:** Understanding how socioeconomic disadvantage relates to school performance.  
-- **Data used:** EdGap.org, NCES Common Core of Data (CCD), and U.S. Census Bureau (ACS 2013–2017).  
-- **Key outcome:** A reduced OLS model explains roughly **78% of the variation** in ACT scores, highlighting strong associations between economic context and educational outcomes.
+- **Objective:** Understanding how socioeconomic disadvantage relates to school performance.  
+- **Domain:** Education 
+- **Key Techniques:** Regression
+
+---
+
+## Project Structure
+
+```
+├── data/                 # Raw and processed data
+├── code/                 # Jupyter notebooks and Python scripts
+├── reports/              # Generated reports and visualizations
+├── requirements.txt      # Dependencies
+└── README.md             # Project documentation
+```
 
 ---
 
@@ -72,43 +84,7 @@ The analysis was performed in the notebook **`Education.ipynb`**, using data fro
   - Educational attainment (college graduates) correlates positively with school performance.  
 - **Limitations:**  
   - Dataset covers 20 states (not nationally representative).  
-  - Indicators are regional averages, not individual student data.  
-
----
-
-## Repository Contents
-
-This repository includes all materials required to reproduce the analysis:
-
-| File/Folder | Description |
-|--------------|-------------|
-| `data/` | Raw and processed datasets (EdGap, CCD, ACS) |
-| `Education.ipynb` | Jupyter notebook with full analysis and visualizations |
-| `education_report_with_tables.docx` | Final written report communicating the results |
-| `README.md` | Project overview and documentation |
-| `requirements.txt` | Python libraries and software requirements |
-
----
-
-## Requirements
-
-This project uses Python 3.10+ and the following libraries:
-
-```
-pandas
-numpy
-matplotlib
-seaborn
-plotly
-statsmodels
-openpyxl
-```
-
-Install all dependencies using:
-
-```bash
-pip install -r requirements.txt
-```
+  - Indicators are regional averages, not individual student data.  ```
 
 ---
 
