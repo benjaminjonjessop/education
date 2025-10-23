@@ -1,65 +1,134 @@
-# Project Title (This is a template README.md file that you can adapt to your project)
+# Predicting School Performance from Socioeconomic Factors
 
-> A brief description of what the project does and its purpose.
+> An analysis exploring whether school performance, measured by average ACT scores, can be predicted by socioeconomic conditions across U.S. schools in 2016–2017.
 
 ---
 
 ## Project Overview
 
-Provide a short and concise overview of the project. Mention the problem it solves, the data used, and the key outcomes or findings.
+This project examines the relationship between school performance and socioeconomic context using publicly available datasets. The analysis evaluates whether factors such as unemployment rate, college attainment, and the proportion of students receiving free or reduced-price lunch predict differences in average ACT scores among U.S. schools.
 
-- **Objective:** Clearly state the main goal of the project.
-- **Domain:** (e.g., Healthcare, Finance, E-commerce, etc.)
-- **Key Techniques:** (e.g., Regression, Classification, Clustering, NLP, Time Series)
-
----
-
-## Project Structure
-
-```
-├── data/                 # Raw and processed data
-├── code/                 # Jupyter notebooks and Python scripts
-├── reports/              # Generated reports and visualizations
-├── requirements.txt      # Dependencies
-└── README.md             # Project documentation
-```
+- **Problem addressed:** Understanding how socioeconomic disadvantage relates to school performance.  
+- **Data used:** EdGap.org, NCES Common Core of Data (CCD), and U.S. Census Bureau (ACS 2013–2017).  
+- **Key outcome:** A reduced OLS model explains roughly **78% of the variation** in ACT scores, highlighting strong associations between economic context and educational outcomes.
 
 ---
 
 ## Data
 
-- **Source:** Link to the data source(s) 
-- **Description:** Brief overview of the dataset features, size, and format
-- **License:** (if applicable)
+- **Sources:**
+  - [EdGap.org](https://www.edgap.org/) — Socioeconomic indicators by school  
+  - [Common Core of Data (CCD) – NCES](https://nces.ed.gov/ccd/) — School-level information  
+  - [ACS 2013–2017 (U.S. Census Bureau)](https://api.census.gov/data/2017/acs/acs5/subject) — Regional socioeconomic measures (e.g., unemployment, education levels)  
+
+- **Coverage:**  
+  School- and state-level data for the 2016–2017 school year across 20 U.S. states.  
+
+- **License:**  
+  Publicly available open data provided by NCES and the U.S. Census Bureau.  
 
 ---
 
 ## Analysis
 
-Describe the notebooks and/or scripts used to perform the analysis. Specify the order in which the code should be run to reproduce the results.
+The analysis was performed in the notebook **`Education.ipynb`**, using data from the `data/` directory.
+
+### Steps
+1. **Data Preparation**
+   - Load and merge EdGap, CCD, and ACS datasets  
+   - Remove duplicates and handle missing values  
+   - Convert units (e.g., percent to fraction)  
+
+2. **Feature Selection**
+   - Chosen predictors:  
+     `rate_unemployment`, `percent_college`, and `percent_lunch`
+
+3. **Exploratory Analysis**
+   - Descriptive statistics and correlation matrices  
+   - Scatterplots and pairplots to visualize relationships  
+
+4. **Modeling**
+   - Reduced Ordinary Least Squares (OLS) model:  
+     `average_act ~ rate_unemployment + percent_college + percent_lunch`  
+   - Evaluate model fit (R², Adj. R²) and statistical significance  
+
+5. **Results Communication**
+   - Exported formatted tables (`desc.csv`, `corr.csv`, `regression.csv`)  
+   - Final report: `education_report_with_tables.docx`  
 
 ---
 
 ## Results
 
-Include a short discussion of the findings and what they imply.
+| Predictor | Coefficient | p-value | Direction |
+|------------|--------------|----------|-----------|
+| Unemployment rate | −2.17 | < 0.001 | Negative |
+| College graduates (%) | +1.72 | < 0.001 | Positive |
+| Free/reduced lunch (%) | −7.59 | < 0.001 | Negative |
+
+- **Model Fit:** R² = 0.78, Adj. R² = 0.78, N = 7,227  
+- **Key Findings:**  
+  - Schools with higher economic disadvantage (higher unemployment and lunch participation) tend to have lower ACT scores.  
+  - Educational attainment (college graduates) correlates positively with school performance.  
+- **Limitations:**  
+  - Dataset covers 20 states (not nationally representative).  
+  - Indicators are regional averages, not individual student data.  
+
+---
+
+## Repository Contents
+
+This repository includes all materials required to reproduce the analysis:
+
+| File/Folder | Description |
+|--------------|-------------|
+| `data/` | Raw and processed datasets (EdGap, CCD, ACS) |
+| `Education.ipynb` | Jupyter notebook with full analysis and visualizations |
+| `education_report_with_tables.docx` | Final written report communicating the results |
+| `README.md` | Project overview and documentation |
+| `requirements.txt` | Python libraries and software requirements |
+
+---
+
+## Requirements
+
+This project uses Python 3.10+ and the following libraries:
+
+```
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+statsmodels
+openpyxl
+```
+
+Install all dependencies using:
+
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
 ## Authors
 
-- Your Name - [@yourhandle](https://github.com/yourhandle)
+**Ben Jessop**  
+- GitHub: [@benjaminjonjessop](https://github.com/benjaminjonjessop)  
+- Seattle University Data Science Certificate Program  
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**.  
+See the [LICENSE](LICENSE) file for details.
 
 ---
 
 ## Acknowledgements
 
-- Tools/libraries used
-- Tutorials or papers referenced
-- Inspiration or collaborators
+- Seattle University Faculty for guidance on data science methodology  
+- Tools: `pandas`, `statsmodels`, `seaborn`, `plotly`  
+- Data providers: NCES and the U.S. Census Bureau  
